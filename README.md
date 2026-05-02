@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Nexus - Management Application
 
-## Getting Started
+Project Nexus is a full-stack project management web application built to streamline task delegation and tracking. It features a robust Role-Based Access Control (RBAC) system, allowing Project Admins to create projects and assign tasks, while Team Members can track and update their progress.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Authentication System:** Secure signup and login functionality using JWT and bcrypt password hashing.
+- **Role-Based Access Control (RBAC):** 
+  - **Project Admins:** Full access to create projects, create tasks, and assign tasks to specific team members.
+  - **Team Members:** Restricted access to view assigned projects and update task statuses (Todo, In Progress, Done).
+- **Project & Team Management:** Admins can oversee all ongoing projects and collaborate with registered team members.
+- **Task Tracking:** Full task lifecycle management with due dates, descriptions, assignees, and real-time status updates.
+- **Dynamic Dashboard:** A centralized dashboard displaying task progress metrics, status breakdowns, and a list of overdue/active tasks.
+- **Premium UI:** Custom-built design system featuring a sleek dark mode, glassmorphism elements, and responsive layouts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Technology Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend:** Next.js 15 (App Router), React 19, TypeScript
+- **Styling:** Vanilla CSS with custom CSS variables and glassmorphism utilities
+- **Backend API:** Next.js Route Handlers (REST APIs)
+- **Database:** PostgreSQL (Production) / SQLite (Local Development)
+- **ORM:** Prisma
+- **Authentication:** Custom JWT-based authentication
+- **Deployment:** Railway
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Live Demo
 
-## Learn More
+The application is deployed and live on Railway!
+**URL:** [https://project-manager-production-d11b.up.railway.app/](https://project-manager-production-d11b.up.railway.app/)
 
-To learn more about Next.js, take a look at the following resources:
+## 💻 Local Development Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this project locally on your machine:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/Project-Manager.git
+   cd Project-Manager
+   ```
 
-## Deploy on Vercel
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Set up Environment Variables:**
+   Create a `.env` file in the root directory and add the following:
+   ```env
+   # Local SQLite Database (Development)
+   DATABASE_URL="file:./dev.db"
+   JWT_SECRET="your_super_secret_jwt_key_here"
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Initialize the Database:**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
+   *The application will be available at http://localhost:3000*
+
+## 📦 Deployment Instructions (Railway)
+
+This application is configured for seamless deployment on Railway using Nixpacks.
+
+1. Connect your GitHub repository to a new Railway project.
+2. Add a **PostgreSQL** database to your Railway project.
+3. Link the `DATABASE_URL` variable from the PostgreSQL service to your Next.js application.
+4. Add a custom `JWT_SECRET` variable to your Next.js application.
+5. Railway will automatically build the Next.js app, run the database migrations (`npx prisma db push`), and start the server!
